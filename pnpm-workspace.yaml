@@ -31,6 +31,13 @@ overrides:
   canvas: 3.2.3
   sharp: ^0.34.5
 packageExtensions:
+  rolldown@1.1.5:
+    optionalDependencies:
+      '@rolldown/binding-linux-loong64-gnu': 1.1.5
+  sharp@0.34.5:
+    optionalDependencies:
+      '@img/sharp-linux-loong64': 0.34.5
+      '@img/sharp-libvips-linux-loong64': 1.2.4
   nestjs-kysely:
     dependencies:
       tslib: '*'

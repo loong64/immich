@@ -1,4 +1,4 @@
-FROM ghcr.io/immich-app/base-server-dev:202607211135@sha256:83c9ff3f7390111596a2dcd24a746c3f8618d58259dbc7aae36618d153462f18 AS builder
+FROM ghcr.io/loong64/immich-app/base-server-dev:202607211135 AS builder
 ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0 \
   CI=1 \
   COREPACK_HOME=/tmp \
@@ -9,6 +9,7 @@ RUN npm install --global corepack@latest && \
   corepack enable pnpm && \
   pnpm config set store-dir "$PNPM_HOME"
 
+COPY .npmrc /root/.npmrc
 FROM builder AS server
 
 WORKDIR /usr/src/app
@@ -56,7 +57,7 @@ FROM builder AS plugins
 
 ARG TARGETPLATFORM
 
-COPY --from=ghcr.io/jdx/mise:2026.7.11@sha256:6599c81b0da6206cbf5151df97a36794d70aaec4574ceb92d13783b42080b055 /usr/local/bin/mise /usr/local/bin/mise
+COPY --from=ghcr.io/loong64/jdx/mise:v2026.7.11 /usr/local/bin/mise /usr/local/bin/mise
 
 WORKDIR /app
 COPY ./mise.toml ./mise.toml
@@ -80,7 +81,7 @@ RUN --mount=type=cache,id=pnpm-packages,target=/buildcache/pnpm-store \
   --mount=type=cache,id=mise-tools-${TARGETPLATFORM},target=/buildcache/mise \
   mise //:plugins
 
-FROM ghcr.io/immich-app/base-server-prod:202607211135@sha256:ced131da7523544fe975cfd25abd67386e712e39496340b437cd95a08d0a18f3
+FROM ghcr.io/loong64/immich-app/base-server-prod:202607211135
 
 WORKDIR /usr/src/app
 ENV NODE_ENV=production \
@@ -90,8 +91,8 @@ ENV NODE_ENV=production \
 COPY --from=server /output/server-pruned ./server
 COPY --from=web /usr/src/app/web/build /build/www
 COPY --from=cli /output/cli-pruned ./cli
-COPY --from=plugins /app/packages/plugin-core/dist /build/plugins/immich-plugin-core/dist
-COPY --from=plugins /app/packages/plugin-core/manifest.json /build/plugins/immich-plugin-core/manifest.json
+#COPY --from=plugins /app/packages/plugin-core/dist /build/plugins/immich-plugin-core/dist
+#COPY --from=plugins /app/packages/plugin-core/manifest.json /build/plugins/immich-plugin-core/manifest.json
 RUN ln -s ../../cli/bin/immich server/bin/immich
 COPY LICENSE /licenses/LICENSE.txt
 COPY LICENSE /LICENSE

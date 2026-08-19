@@ -13,6 +13,7 @@
     "pnpm": ">=10.0.0"
   },
   "devDependencies": {
+    "lightningcss-linux-loong64-gnu": "https://registry.loongnix.cn:5873/lightningcss-linux-loong64-gnu/-/lightningcss-linux-loong64-gnu-1.32.0.tgz",
     "prettier": "^3.8.3",
     "prettier-plugin-sort-json": "^4.2.0"
   }

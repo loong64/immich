@@ -9,7 +9,7 @@ overrides:
   canvas: 3.2.3
   sharp: ^0.34.5
 
-packageExtensionsChecksum: sha256-W6pFzyf+6QXnV91iA6oob0OGVkergPXDN1afLgoF53k=
+packageExtensionsChecksum: sha256-C/5SPwh2ATo3+f30P433dQrdE6DcSKtTqDYWLOI0Cc8=
 
 pnpmfileChecksum: sha256-un98do36L0wZyqsjcLozQ3YUadCAn2yz5bXcBbOuyDA=
 
@@ -17,6 +17,9 @@ importers:
 
   .:
     devDependencies:
+      lightningcss-linux-loong64-gnu:
+        specifier: https://registry.loongnix.cn:5873/lightningcss-linux-loong64-gnu/-/lightningcss-linux-loong64-gnu-1.32.0.tgz
+        version: https://registry.loongnix.cn:5873/lightningcss-linux-loong64-gnu/-/lightningcss-linux-loong64-gnu-1.32.0.tgz
       prettier:
         specifier: ^3.8.3
         version: 3.9.5
@@ -2988,6 +2991,12 @@ packages:
     os: [linux]
     libc: [glibc]
 
+  '@img/sharp-libvips-linux-loong64@1.2.4':
+    resolution: {integrity: sha512-IDH2fPjseIW+c6mY+tzA3jRgBEtpDNvT5G/jWG5GM2TnB6y0rIkffvFZF7vRR6PewEaPMiiz/y6QzKzGp1Zd6w==}
+    cpu: [loong64]
+    os: [linux]
+    libc: [glibc]
+
   '@img/sharp-libvips-linux-ppc64@1.2.4':
     resolution: {integrity: sha512-FMuvGijLDYG6lW+b/UvyilUWu5Ayu+3r2d1S8notiGCIyYU/76eig1UfMmkZ7vwgOrzKzlQbFSuQfgm7GYUPpA==}
     cpu: [ppc64]
@@ -3035,6 +3044,13 @@ packages:
     resolution: {integrity: sha512-9dLqsvwtg1uuXBGZKsxem9595+ujv0sJ6Vi8wcTANSFpwV/GONat5eCkzQo/1O6zRIkh0m/8+5BjrRr7jDUSZw==}
     engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
     cpu: [arm]
+    os: [linux]
+    libc: [glibc]
+
+  '@img/sharp-linux-loong64@0.34.5':
+    resolution: {integrity: sha512-43ZoS3OcIM5xWRv19Wjc+kS+nF3UDZaEarjhKqbBAuUpSc7AGpUa5dAwUqUMgaVq403M9y5vD9maCwCLLyloQQ==}
+    engines: {node: ^18.17.0 || ^20.3.0 || >=21.0.0}
+    cpu: [loong64]
     os: [linux]
     libc: [glibc]
 
@@ -4423,6 +4439,13 @@ packages:
     cpu: [arm64]
     os: [linux]
     libc: [musl]
+
+  '@rolldown/binding-linux-loong64-gnu@1.1.5':
+    resolution: {integrity: sha512-cb4UmToA9yH8+s+/4OoibDolHEbNnpepqfwGSzH2z517wFo84rfhi2v4bqYcSkatCmpsY3j2qjej5KSrD/RYEQ==}
+    engines: {node: ^20.19.0 || >=22.12.0}
+    cpu: [loong64]
+    os: [linux]
+    libc: [glibc]
 
   '@rolldown/binding-linux-ppc64-gnu@1.1.5':
     resolution: {integrity: sha512-fsK/sNBnxzBlL4O1JNrZakVQxPspqpED5dLtNsZS9oOKmtSpdNIzxH2kkol5HYTWJN47sE20ztMJPxfZ89qGOg==}
@@ -9042,6 +9065,14 @@ packages:
     cpu: [arm64]
     os: [linux]
     libc: [musl]
+
+  lightningcss-linux-loong64-gnu@https://registry.loongnix.cn:5873/lightningcss-linux-loong64-gnu/-/lightningcss-linux-loong64-gnu-1.32.0.tgz:
+    resolution: {integrity: sha512-utJa3DpGaIbE9gPZJzM5LlWalmf3IRtHtnEtRuIwlvCZjN7uf3kLXTfgW95mN6y0CqAFuQNH9zHEIOK2OswdzQ==, tarball: https://registry.loongnix.cn:5873/lightningcss-linux-loong64-gnu/-/lightningcss-linux-loong64-gnu-1.32.0.tgz}
+    version: 1.32.0
+    engines: {node: '>= 12.0.0'}
+    cpu: [loong64]
+    os: [linux]
+    libc: [glibc]
 
   lightningcss-linux-x64-gnu@1.32.0:
     resolution: {integrity: sha512-V7Qr52IhZmdKPVr+Vtw8o+WLsQJYCTd8loIfpDaMRWGUZfBOYEJeyJIkqGIDMZPwPx24pUMfwSxxI8phr/MbOA==}
@@ -15930,6 +15961,9 @@ snapshots:
   '@img/sharp-libvips-linux-arm@1.2.4':
     optional: true
 
+  '@img/sharp-libvips-linux-loong64@1.2.4':
+    optional: true
+
   '@img/sharp-libvips-linux-ppc64@1.2.4':
     optional: true
 
@@ -15956,6 +15990,11 @@ snapshots:
   '@img/sharp-linux-arm@0.34.5':
     optionalDependencies:
       '@img/sharp-libvips-linux-arm': 1.2.4
+    optional: true
+
+  '@img/sharp-linux-loong64@0.34.5':
+    optionalDependencies:
+      '@img/sharp-libvips-linux-loong64': 1.2.4
     optional: true
 
   '@img/sharp-linux-ppc64@0.34.5':
@@ -17429,6 +17468,9 @@ snapshots:
     optional: true
 
   '@rolldown/binding-linux-arm64-musl@1.1.5':
+    optional: true
+
+  '@rolldown/binding-linux-loong64-gnu@1.1.5':
     optional: true
 
   '@rolldown/binding-linux-ppc64-gnu@1.1.5':
@@ -22413,6 +22455,8 @@ snapshots:
   lightningcss-linux-arm64-musl@1.33.0:
     optional: true
 
+  lightningcss-linux-loong64-gnu@https://registry.loongnix.cn:5873/lightningcss-linux-loong64-gnu/-/lightningcss-linux-loong64-gnu-1.32.0.tgz: {}
+
   lightningcss-linux-x64-gnu@1.32.0:
     optional: true
 
@@ -25035,6 +25079,7 @@ snapshots:
       '@rolldown/binding-linux-arm-gnueabihf': 1.1.5
       '@rolldown/binding-linux-arm64-gnu': 1.1.5
       '@rolldown/binding-linux-arm64-musl': 1.1.5
+      '@rolldown/binding-linux-loong64-gnu': 1.1.5
       '@rolldown/binding-linux-ppc64-gnu': 1.1.5
       '@rolldown/binding-linux-s390x-gnu': 1.1.5
       '@rolldown/binding-linux-x64-gnu': 1.1.5
@@ -25333,6 +25378,7 @@ snapshots:
       '@img/sharp-libvips-darwin-x64': 1.2.4
       '@img/sharp-libvips-linux-arm': 1.2.4
       '@img/sharp-libvips-linux-arm64': 1.2.4
+      '@img/sharp-libvips-linux-loong64': 1.2.4
       '@img/sharp-libvips-linux-ppc64': 1.2.4
       '@img/sharp-libvips-linux-riscv64': 1.2.4
       '@img/sharp-libvips-linux-s390x': 1.2.4
@@ -25341,6 +25387,7 @@ snapshots:
       '@img/sharp-libvips-linuxmusl-x64': 1.2.4
       '@img/sharp-linux-arm': 0.34.5
       '@img/sharp-linux-arm64': 0.34.5
+      '@img/sharp-linux-loong64': 0.34.5
       '@img/sharp-linux-ppc64': 0.34.5
       '@img/sharp-linux-riscv64': 0.34.5
       '@img/sharp-linux-s390x': 0.34.5
