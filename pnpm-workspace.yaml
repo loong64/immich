@@ -31,6 +31,13 @@ overrides:
   canvas: 3.2.3
   sharp: ^0.35.3
 packageExtensions:
+  rolldown@1.2.5:
+    optionalDependencies:
+      '@rolldown/binding-linux-loong64-gnu': 1.2.5
+  sharp@0.35.3:
+    optionalDependencies:
+      '@img/sharp-linux-loong64': 0.35.3
+      '@img/sharp-libvips-linux-loong64': 1.3.2
   nestjs-kysely:
     dependencies:
       tslib: '*'
@@ -68,3 +75,7 @@ verifyDepsBeforeRun: install
 minimumReleaseAgeExclude:
   - '@immich/ui@0.86.0'
   - '@immich/sql-tools@0.6.3'
+
+# sharp 0.35 uses an explicit runtime loader list; include the LoongArch64 binary.
+patchedDependencies:
+  sharp@0.35.3: patches/sharp@0.35.3.patch
