@@ -7,6 +7,7 @@ ENV COREPACK_ENABLE_DOWNLOAD_PROMPT=0 \
 
 RUN npm install --global corepack@latest && \
   corepack enable pnpm && \
+  corepack install --global pnpm@11.28.6 && \
   pnpm config set store-dir "$PNPM_HOME"
 
 FROM builder AS server
