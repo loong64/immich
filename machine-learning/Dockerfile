@@ -1,6 +1,6 @@
 ARG DEVICE=cpu
 
-FROM python:3.13-slim-trixie@sha256:9d2e5553305c7c7b0097999bb17187c69b921ccd6bc9d40e4bb5ebe652c00285 AS builder-cpu
+FROM ghcr.io/loong64/python:3.13-slim-trixie AS builder-cpu
 
 FROM python:3.13-slim-trixie@sha256:7c61056e61ac89e852de05f3dc6fa51a6dd2181797bceed46aa725dd7cb2cd3b AS builder-openvino
 
@@ -72,16 +72,17 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     VIRTUAL_ENV=/opt/venv
 
-RUN apt-get update && apt-get install -y --no-install-recommends g++ git
+RUN apt-get update && apt-get install -y --no-install-recommends g++ git wget && \
+    wget -nv https://github.com/loong64/uv/releases/latest/download/uv-loongarch64-unknown-linux-gnu.tar.gz -O - | tar xz --strip-components=1 -C /bin
 
-COPY --from=ghcr.io/astral-sh/uv:0.8.15@sha256:a5727064a0de127bdb7c9d3c1383f3a9ac307d9f2d8a391edc7896c54289ced0 /uv /uvx /bin/
+# COPY --from=ghcr.io/astral-sh/uv:0.8.15@sha256:a5727064a0de127bdb7c9d3c1383f3a9ac307d9f2d8a391edc7896c54289ced0 /uv /uvx /bin/
 RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=uv.lock,target=uv.lock \
     --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
     uv sync --frozen --extra ${DEVICE} --no-dev --no-editable --no-install-project --compile-bytecode --no-progress --active --link-mode copy && \
     if [ "$DEVICE" = "openvino" ]; then uv pip install --no-deps /opt/onnxruntime_openvino-*.whl; fi
 
-FROM python:3.13-slim-trixie@sha256:9d2e5553305c7c7b0097999bb17187c69b921ccd6bc9d40e4bb5ebe652c00285 AS prod-cpu
+FROM ghcr.io/loong64/python:3.13-slim-trixie AS prod-cpu
 
 ENV MACHINE_LEARNING_MODEL_ARENA=false
 
@@ -150,8 +151,8 @@ ENV MACHINE_LEARNING_MODEL_ARENA=false
 
 ADD --chmod=644 --checksum=sha256:73993ed4b440460825f21611731564503cc1d5a0c123746477da6cd574f34885 "https://github.com/airockchip/rknn-toolkit2/raw/refs/tags/${RKNN_TOOLKIT_VERSION}/rknpu2/runtime/Linux/librknn_api/aarch64/librknnrt.so" /usr/lib/
 
-FROM python:3.13-slim-trixie@sha256:9d2e5553305c7c7b0097999bb17187c69b921ccd6bc9d40e4bb5ebe652c00285 AS mimalloc
-RUN echo "deb http://deb.debian.org/debian trixie-backports main" > /etc/apt/sources.list.d/backports.list && \
+FROM ghcr.io/loong64/python:3.13-slim-trixie AS mimalloc
+RUN echo "deb http://mirrors.loong64.com/debian trixie-backports main" > /etc/apt/sources.list.d/backports.list && \
     apt-get update && \
     apt-get install -y --no-install-recommends libmimalloc3/trixie-backports && \
     cp /usr/lib/*-linux-gnu/libmimalloc.so.3 /libmimalloc.so
