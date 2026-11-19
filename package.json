@@ -8,11 +8,12 @@
     "format": "prettier --cache --check i18n/",
     "format:fix": "prettier --cache --write --list-different i18n"
   },
-  "packageManager": "pnpm@12.15.0",
+  "packageManager": "pnpm@11.28.6",
   "engines": {
     "pnpm": ">=10.0.0"
   },
   "devDependencies": {
+    "lightningcss-linux-loong64-gnu": "https://registry.loongnix.cn:5873/lightningcss-linux-loong64-gnu/-/lightningcss-linux-loong64-gnu-1.33.0.tgz",
     "prettier": "^3.8.3",
     "prettier-plugin-sort-json": "^4.2.0"
   }
